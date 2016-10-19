@@ -3,12 +3,7 @@ def parse_training_csv(csv):
     features = []
     targets = []
 
-    # Open the training data CSV
-    f = open(csv, 'r')
-
-    # Split the CSV into lines
-    lines = f.read().split('\n')
-    f.close()
+    lines = lines_for_csv(csv)
 
     # Get the number of columns
     columns = len(lines[0].split(','))
@@ -29,14 +24,9 @@ def parse_prediction_csv(csv):
     # Set up arrays for predictions
     ids = []
     features = []
-
-    # Open the training data CSV
-    f = open('numerai_tournament_data.csv', 'r')
-
-    # Split the CSV into lines
-    lines = f.read().split('\n')
-    f.close()
-
+    
+    lines = lines_for_csv(csv)
+    
     # Get the number of columns
     columns = len(lines[0].split(','))
 
@@ -60,3 +50,13 @@ def write_lines_to_csv(csv, lines):
         f.write(','.join(line))
         f.write('\n')
     f.close()
+    
+def lines_for_csv(csv):
+    # Open the training data CSV
+    f = open(csv, 'r')
+
+    # Split the CSV into lines
+    lines = f.read().split('\n')
+    f.close()
+    
+    return lines
